@@ -7,9 +7,6 @@
       "start": "wrangler pages dev",
       "deploy": "wrangler pages publish"
     },
-    "dependencies": {
-      "node-fetch": "^3.0.0"
-    },
     "devDependencies": {
       "wrangler": "^3.0.0"
     }

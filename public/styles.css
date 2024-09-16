@@ -29,6 +29,16 @@ body {
     color: #004d40;
   }
   
+  select {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    width: 100%;
+    max-width: 300px;
+  }
+  
   button {
     background-color: #00796b;
     color: white;

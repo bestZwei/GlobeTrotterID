@@ -1,7 +1,8 @@
 document.getElementById('generate-btn').addEventListener('click', generateIdentity);
 
 async function generateIdentity() {
-  const response = await fetch('/api');
+  const country = document.getElementById('country-select').value;
+  const response = await fetch(`/api?country=${country}`);
   const data = await response.json();
 
   document.getElementById('name').textContent = `Name: ${data.name}`;

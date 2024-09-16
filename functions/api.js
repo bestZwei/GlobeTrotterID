@@ -24,7 +24,7 @@ export async function onRequest(context) {
       return new Response('Failed to retrieve detailed address', { status: 500 });
     }
   
-    const userData = await fetch('https://randomuser.me/api/');
+    const userData = await fetch(`https://randomuser.me/api/?nat=${country.toLowerCase()}`);
     const userJson = await userData.json();
     if (userJson && userJson.results && userJson.results.length > 0) {
       const user = userJson.results[0];
@@ -43,6 +43,7 @@ export async function onRequest(context) {
   }
   
   function getRandomLocationInCountry(country) {
+    // Example: Random coordinates for demonstration
     return { lat: Math.random() * 180 - 90, lng: Math.random() * 360 - 180 };
   }
   
@@ -51,7 +52,7 @@ export async function onRequest(context) {
   }
   
   function getRandomCountry() {
-    const countries = ["USA", "Canada", "Germany", "France", "Australia"];
+    const countries = ["US", "CA", "DE", "FR", "AU"];
     return countries[Math.floor(Math.random() * countries.length)];
   }
   
