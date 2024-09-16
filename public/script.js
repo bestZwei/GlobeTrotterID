@@ -20,9 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = await response.json();
         const user = data.results[0];
         
-        // Clear previous results
-        resultTableBody.innerHTML = '';
-  
         const newRow = document.createElement('tr');
         newRow.innerHTML = `
           <td class="text-center"><img src="${user.picture.thumbnail}" alt="User Picture"></td>
@@ -34,7 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
           <td>${user.location.street.number} ${user.location.street.name}, ${user.location.city}, ${user.location.state}, ${user.location.country} ${user.location.postcode}</td>
           <td>${user.nat}</td>
         `;
-        resultTableBody.appendChild(newRow);
+  
+        // Insert new row at the top
+        resultTableBody.insertBefore(newRow, resultTableBody.firstChild);
       } catch (error) {
         alert("Error fetching data. Please try again later.");
         console.error(error);
