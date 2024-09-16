@@ -25,6 +25,7 @@ body, h1, h2, h3, h4, h5, h6, p, ol, ul {
     padding: 20px 0;
     text-align: center;
     color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
   .title {
@@ -57,19 +58,19 @@ body, h1, h2, h3, h4, h5, h6, p, ol, ul {
   
   .form-group {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 100%;
     max-width: 800px;
     margin-bottom: 20px;
   }
   
-  label {
+  .form-label {
     font-size: 1.1em;
     margin-right: 10px;
   }
   
-  select {
+  .form-select {
     padding: 10px;
     font-size: 1.1em;
     border-radius: 5px;
@@ -120,12 +121,14 @@ body, h1, h2, h3, h4, h5, h6, p, ol, ul {
     width: 100%;
     text-align: center;
     margin-top: auto;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
   }
   
   .footer a {
     color: #007bff;
     text-decoration: none;
     font-weight: bold;
+    margin: 0 10px;
   }
   
   .footer a:hover {

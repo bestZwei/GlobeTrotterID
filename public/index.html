@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Globetrotter ID</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="https://randomuser.me/favicon.ico" type="image/x-icon">
 </head>
 <body>
   <header>
@@ -14,8 +15,8 @@
   <main>
     <div class="container">
       <div class="form-group">
-        <label for="country">选择国家:</label>
-        <select id="country">
+        <label for="country" class="form-label">选择国家:</label>
+        <select id="country" class="form-select">
           <option value="">随机</option>
           <option value="AU">澳大利亚</option>
           <option value="BR">巴西</option>
@@ -58,7 +59,8 @@
     </div>
   </main>
   <footer class="footer">
-    Powered by <a href="http://libredev.is-an.org/" target="_blank">LibreDev</a>
+    Powered by <a href="http://libredev.is-an.org/" target="_blank">LibreDev</a> |
+    <a href="https://github.com/bestZwei/GlobeTrotterID" target="_blank">GitHub</a>
   </footer>
   <div class="modal hidden" id="loading-modal">
     <div class="modal-content">
