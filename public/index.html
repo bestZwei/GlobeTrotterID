@@ -3,28 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GlobeTrotter ID</title>
-  <link rel="stylesheet" href="/styles.css">
+  <title>Real Address Generator</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="title">Real Address Generator</div>
+  <div class="subtitle">真实地址生成器</div>
+  <div class="subtitle-small">Click to copy information（点击即可复制信息）</div>
   <div class="container">
-    <h1>GlobeTrotter ID</h1>
-    <div class="identity">
-      <div class="info" id="name">Name: Loading...</div>
-      <div class="info" id="gender">Gender: Loading...</div>
-      <div class="info" id="phone">Phone: Loading...</div>
-      <div class="info" id="address">Address: Loading...</div>
+    <div class="copied" id="copied">Copied!</div>
+    <div class="name" id="name">Name: Loading...</div>
+    <div class="gender" id="gender">Gender: Loading...</div>
+    <div class="phone" id="phone">Phone: Loading...</div>
+    <div class="address" id="address">Address: Loading...</div>
+    <button class="refresh-btn" id="generate-btn">Get Another Address 获取新地址</button>
+    <div class="country-select">
+      <label for="country">Select country, new address will be generated automatically after checking the box</label><br>
+      <span>选择国家，在勾选后将自动生成新地址</span>
+      <select id="country">
+        <!-- Options will be populated by script.js -->
+      </select>
     </div>
-    <select id="country-select">
-      <option value="US">United States</option>
-      <option value="CA">Canada</option>
-      <option value="DE">Germany</option>
-      <option value="FR">France</option>
-      <option value="AU">Australia</option>
-      <!-- Add more countries as needed -->
-    </select>
-    <button id="generate-btn">Generate New Identity</button>
+    <iframe class="map" id="map" src="" frameborder="0"></iframe>
   </div>
-  <script src="/script.js"></script>
+  <div class="footer">
+    Original version by chatgpt.org.uk, modified by Adonis142857 ｜ <a href="https://github.com/Adonis142857/Real-Address-Generator" target="_blank"><img src="https://pic.imgdb.cn/item/66e7ab36d9c307b7e9cefd24.png" alt="GitHub" style="width: 20px; height: 20px; vertical-align: middle; position: relative; top: -3px;"></a>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
