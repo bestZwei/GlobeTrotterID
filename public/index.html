@@ -14,42 +14,42 @@
   <main>
     <div class="container">
       <div class="form-group">
-        <label for="country">Select country:</label>
-        <select id="country" class="custom-select">
-          <option value="">Random</option>
-          <option value="AU">Australia</option>
-          <option value="BR">Brazil</option>
-          <option value="CA">Canada</option>
-          <option value="CH">Switzerland</option>
-          <option value="DE">Germany</option>
-          <option value="ES">Spain</option>
-          <option value="FI">Finland</option>
-          <option value="FR">France</option>
-          <option value="GB">United Kingdom</option>
-          <option value="IE">Ireland</option>
-          <option value="IN">India</option>
-          <option value="IR">Iran</option>
-          <option value="MX">Mexico</option>
-          <option value="NL">Netherlands</option>
-          <option value="NZ">New Zealand</option>
-          <option value="TR">Turkey</option>
-          <option value="UA">Ukraine</option>
-          <option value="US">United States</option>
+        <label for="country">选择国家:</label>
+        <select id="country">
+          <option value="">随机</option>
+          <option value="AU">澳大利亚</option>
+          <option value="BR">巴西</option>
+          <option value="CA">加拿大</option>
+          <option value="CH">瑞士</option>
+          <option value="DE">德国</option>
+          <option value="ES">西班牙</option>
+          <option value="FI">芬兰</option>
+          <option value="FR">法国</option>
+          <option value="GB">英国</option>
+          <option value="IE">爱尔兰</option>
+          <option value="IN">印度</option>
+          <option value="IR">伊朗</option>
+          <option value="MX">墨西哥</option>
+          <option value="NL">荷兰</option>
+          <option value="NZ">新西兰</option>
+          <option value="TR">土耳其</option>
+          <option value="UA">乌克兰</option>
+          <option value="US">美国</option>
         </select>
       </div>
-      <button id="generate-btn" class="btn">Generate</button>
+      <button id="generate-btn" class="btn">生成</button>
 
       <table id="result-table" class="results-table">
         <thead>
           <tr>
-            <th>Picture</th>
-            <th>Name</th>
-            <th>Gender</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Cell</th>
-            <th>Address</th>
-            <th>Nationality</th>
+            <th>头像</th>
+            <th>名字</th>
+            <th>性别</th>
+            <th>邮箱</th>
+            <th>电话</th>
+            <th>手机</th>
+            <th>地址</th>
+            <th>国籍</th>
           </tr>
         </thead>
         <tbody>
@@ -57,12 +57,11 @@
       </table>
     </div>
   </main>
-  <footer>
+  <footer class="footer">
     Powered by <a href="http://libredev.is-an.org/" target="_blank">LibreDev</a>
   </footer>
   <div class="modal hidden" id="loading-modal">
     <div class="modal-content">
-      <div class="loader"></div>
       <p>Loading...</p>
     </div>
   </div>
