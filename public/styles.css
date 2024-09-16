@@ -15,6 +15,7 @@ body, h1, h2, h3, h4, h5, h6, p, ol, ul {
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
+    padding: 20px;
   }
   
   /* Header styles */
@@ -56,34 +57,36 @@ body, h1, h2, h3, h4, h5, h6, p, ol, ul {
   
   .form-group {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
+    width: 100%;
+    max-width: 800px;
     margin-bottom: 20px;
   }
   
   label {
     font-size: 1.1em;
-    margin-bottom: 10px;
+    margin-right: 10px;
   }
   
   select {
-    padding: 12px;
+    padding: 10px;
     font-size: 1.1em;
     border-radius: 5px;
     border: 1px solid #ccc;
+    margin-right: 10px;
+    flex-grow: 1;
   }
   
   .btn {
-    padding: 12px 20px;
-    font-size: 1.2em;
+    padding: 10px 20px;
+    font-size: 1.1em;
     background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 5px;
     cursor: pointer;
-    margin: 20px 0 40px;
-    width: 50%;
-    max-width: 150px;
+    flex-shrink: 0;
   }
   
   .btn:hover {
@@ -98,7 +101,7 @@ body, h1, h2, h3, h4, h5, h6, p, ol, ul {
   
   th, td {
     border: 1px solid #ddd;
-    padding: 15px;
+    padding: 12px;
     text-align: left;
     vertical-align: middle;
   }

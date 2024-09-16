@@ -26,8 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
           <td>${user.name.first} ${user.name.last}</td>
           <td>${user.gender.charAt(0).toUpperCase() + user.gender.slice(1)}</td>
           <td>${user.email}</td>
-          <td>${user.phone}</td>
-          <td>${user.cell}</td>
+          <td>${formatPhoneNumber(user.phone, user.nat)}</td>
+          <td>${formatPhoneNumber(user.cell, user.nat)}</td>
           <td>${user.location.street.number} ${user.location.street.name}, ${user.location.city}, ${user.location.state}, ${user.location.country} ${user.location.postcode}</td>
           <td>${user.nat}</td>
         `;
@@ -48,6 +48,32 @@ document.addEventListener('DOMContentLoaded', () => {
   
     function hideLoadingModal() {
       loadingModal.classList.add('hidden');
+    }
+  
+    function formatPhoneNumber(phone, country) {
+      // Here we mock some country codes. In real development, you may want to use a reliable library or API.
+      const countryCodes = {
+        "AU": "+61",
+        "BR": "+55",
+        "CA": "+1",
+        "CH": "+41",
+        "DE": "+49",
+        "ES": "+34",
+        "FI": "+358",
+        "FR": "+33",
+        "GB": "+44",
+        "IE": "+353",
+        "IN": "+91",
+        "IR": "+98",
+        "MX": "+52",
+        "NL": "+31",
+        "NZ": "+64",
+        "TR": "+90",
+        "UA": "+380",
+        "US": "+1"
+      };
+      
+      return countryCodes[country] ? `${countryCodes[country]} ${phone}` : phone;
     }
   });
   
