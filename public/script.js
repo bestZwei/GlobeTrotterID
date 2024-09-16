@@ -46,6 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const response = await fetch(`/api?country=${country}`);
       const data = await response.json();
   
+      if (data.error) {
+        alert(data.error);
+        return;
+      }
+  
       nameDiv.textContent = `Name: ${data.name}`;
       genderDiv.textContent = `Gender: ${data.gender}`;
       phoneDiv.textContent = `Phone: ${data.phone}`;

@@ -23,7 +23,7 @@ addEventListener('fetch', event => {
     }
   
     if (!address) {
-      return new Response('Failed to retrieve detailed address', { status: 500 })
+      return new Response(JSON.stringify({ error: 'Failed to retrieve detailed address' }), { status: 500 })
     }
   
     const userData = await fetch(`https://randomuser.me/api/?nat=${country.toLowerCase()}`)
@@ -39,9 +39,8 @@ addEventListener('fetch', event => {
       phone = getRandomPhoneNumber(country)
     }
   
-    const html = generateHTML(name, gender, phone, address, country)
-    return new Response(html, {
-      headers: { 'content-type': 'text/html;charset=UTF-8' },
+    return new Response(JSON.stringify({ name, gender, phone, address }), {
+      headers: { 'content-type': 'application/json;charset=UTF-8' },
     })
   }
   
@@ -116,168 +115,5 @@ addEventListener('fetch', event => {
   function getRandomCountry() {
     const countries = ["US", "UK", "FR", "DE", "CN", "JP", "IN", "AU", "BR", "CA", "RU", "ZA", "MX", "KR", "IT", "ES", "TR", "SA", "AR", "EG", "NG", "ID"]
     return countries[Math.floor(Math.random() * countries.length)]
-  }
-  
-  function generateHTML(name, gender, phone, address, country) {
-    return `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <title>Real Address Generator</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <style>
-        body {
-          font-family: Arial, sans-serif;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          flex-direction: column;
-          min-height: 100vh;
-          background-color: #f0f0f0;
-          margin: 0;
-        }
-        .container {
-          text-align: center;
-          background: white;
-          padding: 20px;
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-          width: 90%;
-          max-width: 600px;
-          margin: 20px;
-          box-sizing: border-box;
-          position: relative;
-        }
-        .name, .gender, .phone, .address {
-          font-size: 1.5em;
-          margin-bottom: 10px;
-          cursor: pointer;
-        }
-        .refresh-btn {
-          padding: 10px 20px;
-          background-color: #007bff;
-          color: white;
-          border: none;
-          border-radius: 5px;
-          cursor: pointer;
-          margin-bottom: 20px;
-        }
-        .refresh-btn:hover {
-          background-color: #0056b3;
-        }
-        .country-select {
-          margin-bottom: 20px;
-        }
-        .map {
-          width: 100%;
-          height: 400px;
-          border: 0;
-        }
-        .title {
-          font-size: 2em;
-          margin: 20px 0;
-        }
-        .subtitle {
-          font-size: 1.5em;
-          margin-bottom: 20px;
-        }
-        .footer {
-          margin-top: auto;
-          padding: 10px 0;
-          background-color: #f0f0f0;
-          width: 100%;
-          text-align: center;
-          font-size: 0.9em;
-        }
-        .footer a {
-          color: #007bff;
-          text-decoration: none;
-        }
-        .footer a:hover {
-          text-decoration: underline;
-        }
-        .copied {
-          position: absolute;
-          top: 10px;
-          right: 10px;
-          background: #28a745;
-          color: white;
-          padding: 5px 10px;
-          border-radius: 5px;
-          display: none;
-        }
-        .subtitle-small {
-          font-size: 1.2em;
-          margin-bottom: 20px;
-        }    
-      </style>
-    </head>
-    <body>
-      <div class="title">Real Address Generator</div>
-      <div class="subtitle">真实地址生成器</div>
-      <div class="subtitle-small">Click to copy information（点击即可复制信息）</div>
-      <div class="container">
-        <div class="copied" id="copied">Copied!</div>
-        <div class="name" onclick="copyToClipboard('${name}')">${name}</div>
-        <div class="gender" onclick="copyToClipboard('${gender}')">${gender}</div>
-        <div class="phone" onclick="copyToClipboard('${phone.replace(/[()\s-]/g, '')}')">${phone}</div>
-        <div class="address" onclick="copyToClipboard('${address}')">${address}</div>
-        <button class="refresh-btn" onclick="window.location.reload();">Get Another Address 获取新地址</button>
-        <div class="country-select">
-          <label for="country">Select country, new address will be generated automatically after checking the box</label><br>
-          <span>选择国家，在勾选后将自动生成新地址</span>
-          <select id="country" onchange="changeCountry(this.value)">
-            ${getCountryOptions(country)}
-          </select>
-        </div>
-        <iframe class="map" src="https://www.google.com/maps?q=${encodeURIComponent(address)}&output=embed"></iframe>
-      </div>
-      <div class="footer">
-        Original version by chatgpt.org.uk, modified by Adonis142857 ｜ <a href="https://github.com/Adonis142857/Real-Address-Generator" target="_blank"><img src="https://pic.imgdb.cn/item/66e7ab36d9c307b7e9cefd24.png" alt="GitHub" style="width: 20px; height: 20px; vertical-align: middle; position: relative; top: -3px;"></a>
-      </div>
-      <script>
-        function copyToClipboard(text) {
-          navigator.clipboard.writeText(text).then(() => {
-            const copied = document.getElementById('copied')
-            copied.style.display = 'block'
-            setTimeout(() => {
-              copied.style.display = 'none'
-            }, 2000)
-          })
-        }
-        function changeCountry(country) {
-          window.location.href = \`?country=\${country}\`
-        }
-      </script>
-    </body>
-    </html>
-    `
-  }
-  
-  function getCountryOptions(selectedCountry) {
-    const countries = [
-      { name: "United States 美国", code: "US" },
-      { name: "United Kingdom 英国", code: "UK" },
-      { name: "France 法国", code: "FR" },
-      { name: "Germany 德国", code: "DE" },
-      { name: "China 中国", code: "CN" },
-      { name: "Japan 日本", code: "JP" },
-      { name: "India 印度", code: "IN" },
-      { name: "Australia 澳大利亚", code: "AU" },
-      { name: "Brazil 巴西", code: "BR" },
-      { name: "Canada 加拿大", code: "CA" },
-      { name: "Russia 俄罗斯", code: "RU" },
-      { name: "South Africa 南非", code: "ZA" },
-      { name: "Mexico 墨西哥", code: "MX" },
-      { name: "South Korea 韩国", code: "KR" },
-      { name: "Italy 意大利", code: "IT" },
-      { name: "Spain 西班牙", code: "ES" },
-      { name: "Turkey 土耳其", code: "TR" },
-      { name: "Saudi Arabia 沙特阿拉伯", code: "SA" },
-      { name: "Argentina 阿根廷", code: "AR" },
-      { name: "Egypt 埃及", code: "EG" },
-      { name: "Nigeria 尼日利亚", code: "NG" },
-      { name: "Indonesia 印度尼西亚", code: "ID" }
-    ]
-    return countries.map(({ name, code }) => `<option value="${code}" ${code === selectedCountry ? 'selected' : ''}>${name}</option>`).join('')
   }
   
