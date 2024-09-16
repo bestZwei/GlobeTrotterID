@@ -36,22 +36,21 @@ body {
   
   .container {
     background: white;
-    padding: 20px;
+    padding: 30px;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     width: 100%;
   }
   
   .form-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    text-align: center;
     margin-bottom: 20px;
   }
   
   label {
     font-size: 1.1em;
     margin-bottom: 10px;
+    display: block;
   }
   
   select {
@@ -59,12 +58,15 @@ body {
     font-size: 1.1em;
     border-radius: 5px;
     border: 1px solid #ccc;
+    width: 100%;
+    max-width: 400px; 
+    margin: 10px 0;
   }
   
   .btn {
     padding: 12px 20px;
     font-size: 1.2em;
-    background-color: #007bff;
+    background-color: #28a745;
     color: white;
     border: none;
     border-radius: 8px;
@@ -73,7 +75,7 @@ body {
   }
   
   .btn:hover {
-    background-color: #0056b3;
+    background-color: #218838;
   }
   
   .results-table {
@@ -86,6 +88,7 @@ body {
     border: 1px solid #ddd;
     padding: 15px;
     text-align: left;
+    vertical-align: middle;
   }
   
   th {
@@ -94,6 +97,7 @@ body {
   
   td img {
     border-radius: 50%;
+    max-width: 50px;
   }
   
   .footer {
@@ -135,5 +139,10 @@ body {
     padding: 20px;
     border-radius: 5px;
     text-align: center;
+  }
+  
+  .modal-content img {
+    width: 50px;
+    margin-bottom: 20px;
   }
   

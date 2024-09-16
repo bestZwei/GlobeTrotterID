@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const response = await fetch(apiUrl);
         const data = await response.json();
         const user = data.results[0];
-        
+      
         const newRow = document.createElement('tr');
         newRow.innerHTML = `
           <td class="text-center"><img src="${user.picture.thumbnail}" alt="User Picture"></td>
