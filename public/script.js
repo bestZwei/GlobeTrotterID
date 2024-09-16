@@ -20,6 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = await response.json();
         const user = data.results[0];
         
+        // Clear previous results
+        resultTableBody.innerHTML = '';
+  
         const newRow = document.createElement('tr');
         newRow.innerHTML = `
           <td class="text-center"><img src="${user.picture.thumbnail}" alt="User Picture"></td>

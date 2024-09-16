@@ -2,7 +2,6 @@
     "name": "globetrotter-id",
     "version": "1.0.0",
     "description": "A global random address and identity generator",
-    "main": "functions/api.js",
     "scripts": {
       "start": "wrangler pages dev",
       "deploy": "wrangler pages publish"

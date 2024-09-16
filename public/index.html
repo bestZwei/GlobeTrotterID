@@ -11,9 +11,10 @@
   <div class="title">Real Address Generator</div>
   <div class="subtitle">真实地址生成器</div>
   <div class="container">
+    <button id="generate-btn" class="btn">Generate</button>
     <div class="form-group">
       <label for="country">Select country:</label>
-      <select id="country">
+      <select id="country" class="select-style">
         <option value="">Random</option>
         <option value="AU">Australia</option>
         <option value="BR">Brazil</option>
@@ -35,7 +36,6 @@
         <option value="US">United States</option>
       </select>
     </div>
-    <button id="generate-btn" class="btn">Generate</button>
 
     <table id="result-table" class="results-table">
       <thead>
@@ -54,13 +54,14 @@
       </tbody>
     </table>
   </div>
+
   <div class="modal hidden" id="loading-modal">
     <div class="modal-content">
       <p>Loading...</p>
     </div>
   </div>
   <div class="footer">
-    Original version by chatgpt.org.uk, modified by Adonis142857 ｜ <a href="https://github.com/Adonis142857/Real-Address-Generator" target="_blank"><img src="https://pic.imgdb.cn/item/66e7ab36d9c307b7e9cefd24.png" alt="GitHub" style="width: 20px; height: 20px; vertical-align: middle; position: relative; top: -3px;"></a>
+    Modified by LibreDev<br /><a href="http://libredev.is-an.org" target="_blank">libredev.is-an.org</a>
   </div>
   <script src="script.js"></script>
 </body>
