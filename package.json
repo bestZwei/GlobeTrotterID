@@ -1,14 +1,13 @@
 {
-    "name": "globetrotter-id",
-    "version": "1.0.0",
-    "description": "A global random address and identity generator",
-    "scripts": {
-      "start": "wrangler pages dev",
-      "deploy": "wrangler pages publish"
-    },
-    "dependencies": {},
-    "devDependencies": {
-      "wrangler": "^3.0.0"
-    }
+  "name": "globetrotter-id",
+  "version": "1.0.0",
+  "description": "A global random address and identity generator",
+  "scripts": {
+    "start": "wrangler pages dev",
+    "deploy": "wrangler pages publish"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "wrangler": "^3.0.0"
   }
-  
+}
