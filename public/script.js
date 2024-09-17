@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "CA": "+1",
       "CH": "+41",
       "DE": "+49",
-      "DK": "+45",  
+      "DK": "+45",  // 新增 
       "ES": "+34",
       "FI": "+358",
       "FR": "+33",
@@ -68,9 +68,9 @@ document.addEventListener('DOMContentLoaded', () => {
       "IR": "+98",
       "MX": "+52",
       "NL": "+31",
-      "NO": "+47",  
+      "NO": "+47",  // 新增
       "NZ": "+64",
-      "RS": "+381",  
+      "RS": "+381",  // 新增
       "TR": "+90",
       "UA": "+380",
       "US": "+1"

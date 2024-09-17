@@ -54,6 +54,8 @@ main {
   border-radius: 8px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   width: 100%;
+  max-width: 100%;
+  overflow-x: hidden; /* 新增  */
 }
 
 .form-group {
@@ -100,7 +102,7 @@ main {
 }
 
 .table-container {
-  max-width: 100%;
+  width: 100%;
   overflow-x: auto;
 }
 
@@ -115,6 +117,8 @@ th, td {
   padding: 12px;
   text-align: left;
   vertical-align: middle;
+  word-wrap: break-word; /* 新增，处理长文本  */
+  white-space: nowrap; /* 新增，防止文本换行  */
 }
 
 th {
@@ -187,6 +191,11 @@ td img {
   td img {
     width: 40px;
     height: 40px;
+  }
+
+  th, td {
+    word-wrap: break-word; /* 移动设备下的文本换行 */
+    white-space: normal; /* 允许文本换行 */
   }
 }
 
