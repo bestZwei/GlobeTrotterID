@@ -99,6 +99,11 @@ main {
   background-color: #0056b3;
 }
 
+.table-container {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
 .results-table {
   width: 100%;
   border-collapse: collapse;
