@@ -1,11 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const DOMAIN = 'https://globetrotterid.is-an.org/';
+
   const countrySelect = document.getElementById('country');
   const countInput = document.getElementById('count');
   const generateBtn = document.getElementById('generate-btn');
   const clearBtn = document.getElementById('clear-btn');
   const tableEl = document.getElementById('result-table');
   const emptyState = document.getElementById('empty-state');
-  const countBadge = document.getElementById('count-badge');
+  const metaEl = document.getElementById('meta');
   const copyCsvBtn = document.getElementById('copy-csv');
   const downloadCsvBtn = document.getElementById('download-csv');
   const paginationEl = document.getElementById('pagination');
@@ -22,10 +24,107 @@ document.addEventListener('DOMContentLoaded', () => {
     TR: '+90', UA: '+380', US: '+1'
   };
 
+  const FLAGS = {
+    AU: '🇦🇺', BR: '🇧🇷', CA: '🇨🇦', CH: '🇨🇭', DE: '🇩🇪', DK: '🇩🇰',
+    ES: '🇪🇸', FI: '🇫🇮', FR: '🇫🇷', GB: '🇬🇧', IE: '🇮🇪', IN: '🇮🇳',
+    IR: '🇮🇷', MX: '🇲🇽', NL: '🇳🇱', NO: '🇳🇴', NZ: '🇳🇿', RS: '🇷🇸',
+    TR: '🇹🇷', UA: '🇺🇦', US: '🇺🇸'
+  };
+
+  const I18N = {
+    zh: {
+      brand: 'Globetrotter ID 无界行者',
+      tagline: '无界行者 · 全球随机身份与地址生成',
+      country: '国家',
+      count: '数量',
+      generate: '生成',
+      generating: '生成中…',
+      clear: '清空',
+      export: '导出',
+      copyCsv: '📋 复制 CSV',
+      downloadCsv: '💾 下载 CSV',
+      empty: '点击「生成」开始创建随机身份 ✨',
+      records: '已生成 {n} 条记录',
+      prev: '上一页',
+      next: '下一页',
+      pageInfo: '第 {cur} / {total} 页 · 共 {n} 条',
+      avatar: '头像',
+      name: '姓名',
+      gender: '性别',
+      nationality: '国籍',
+      email: '邮箱',
+      phone: '电话',
+      mobile: '手机',
+      address: '地址',
+      poweredBy: 'Powered by',
+      dataSource: '数据来源',
+      errorFetch: '获取数据失败，请稍后重试',
+      noDataCopy: '暂无数据可复制',
+      noDataDownload: '暂无数据可下载',
+      copySuccess: 'CSV 已复制到剪贴板',
+      copyFail: '复制失败，请尝试下载 CSV',
+      downloadStart: 'CSV 下载已开始',
+      docTitle: 'Globetrotter ID · 全球随机身份与地址生成器',
+      docDesc: 'Globetrotter ID（无界行者）是一个免费的全球随机身份与地址生成器，支持 20+ 国家/地区，一键生成带头像、姓名、邮箱、电话和地址的虚拟身份数据，适用于原型设计、测试与演示。',
+      ogDesc: '免费的全球随机身份与地址生成器，支持 20+ 国家/地区，一键生成虚拟身份数据。',
+      ogLocale: 'zh_CN',
+      countries: {
+        random: '随机', AU: '澳大利亚', BR: '巴西', CA: '加拿大', CH: '瑞士', DE: '德国',
+        DK: '丹麦', ES: '西班牙', FI: '芬兰', FR: '法国', GB: '英国', IE: '爱尔兰',
+        IN: '印度', IR: '伊朗', MX: '墨西哥', NL: '荷兰', NO: '挪威', NZ: '新西兰',
+        RS: '塞尔维亚', TR: '土耳其', UA: '乌克兰', US: '美国'
+      }
+    },
+    en: {
+      brand: 'Globetrotter ID',
+      tagline: 'Globetrotter · Global Random Identity & Address Generator',
+      country: 'Country',
+      count: 'Count',
+      generate: 'Generate',
+      generating: 'Generating…',
+      clear: 'Clear',
+      export: 'Export',
+      copyCsv: '📋 Copy CSV',
+      downloadCsv: '💾 Download CSV',
+      empty: 'Click "Generate" to create random identities ✨',
+      records: '{n} records generated',
+      prev: 'Prev',
+      next: 'Next',
+      pageInfo: 'Page {cur} / {total} · {n} records',
+      avatar: 'Avatar',
+      name: 'Name',
+      gender: 'Gender',
+      nationality: 'Nationality',
+      email: 'Email',
+      phone: 'Phone',
+      mobile: 'Mobile',
+      address: 'Address',
+      poweredBy: 'Powered by',
+      dataSource: 'Data source',
+      errorFetch: 'Failed to fetch data, please try again',
+      noDataCopy: 'No data to copy',
+      noDataDownload: 'No data to download',
+      copySuccess: 'CSV copied to clipboard',
+      copyFail: 'Copy failed, try downloading CSV',
+      downloadStart: 'CSV download started',
+      docTitle: 'Globetrotter ID · Global Random Identity & Address Generator',
+      docDesc: 'Globetrotter ID is a free global random identity & address generator supporting 20+ countries/regions. One click to generate mock identities with avatar, name, email, phone and address for prototyping, testing and demos.',
+      ogDesc: 'A free global random identity & address generator supporting 20+ countries/regions. Generate mock identities in one click.',
+      ogLocale: 'en_US',
+      countries: {
+        random: 'Random', AU: 'Australia', BR: 'Brazil', CA: 'Canada', CH: 'Switzerland', DE: 'Germany',
+        DK: 'Denmark', ES: 'Spain', FI: 'Finland', FR: 'France', GB: 'United Kingdom', IE: 'Ireland',
+        IN: 'India', IR: 'Iran', MX: 'Mexico', NL: 'Netherlands', NO: 'Norway', NZ: 'New Zealand',
+        RS: 'Serbia', TR: 'Turkey', UA: 'Ukraine', US: 'United States'
+      }
+    }
+  };
+
   const MAX_COUNT = 20;
   const PAGE_SIZE = 10;
   let totalCount = 0;
   let currentPage = 1;
+  let currentLang = 'zh';
   let toastTimer = null;
   const generatedUsers = []; // 最新在前，供导出使用
 
@@ -35,7 +134,100 @@ document.addEventListener('DOMContentLoaded', () => {
   downloadCsvBtn.addEventListener('click', downloadCsv);
   prevPageBtn.addEventListener('click', () => changePage(-1));
   nextPageBtn.addEventListener('click', () => changePage(1));
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
+  });
 
+  // ===== 国际化 =====
+  function getI18n() {
+    return I18N[currentLang];
+  }
+
+  function t(key, vars) {
+    let str = getI18n()[key] ?? key;
+    if (vars) {
+      str = str.replace(/\{(\w+)\}/g, (_, k) => (vars[k] != null ? vars[k] : `{${k}}`));
+    }
+    return str;
+  }
+
+  function applyLanguage(lang) {
+    if (!I18N[lang]) return;
+    currentLang = lang;
+    try { localStorage.setItem('gt-lang', lang); } catch (e) { /* ignore */ }
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      el.textContent = t(el.dataset.i18n);
+    });
+
+    applyHeadMeta();
+    updateCountryOptions();
+    updateCount();
+    renderPage();
+
+    document.querySelectorAll('.lang-btn').forEach(b =>
+      b.classList.toggle('active', b.dataset.lang === lang)
+    );
+  }
+
+  function applyHeadMeta() {
+    const d = getI18n();
+    document.title = d.docTitle;
+    setMeta('description', d.docDesc);
+    setMetaProperty('og:title', d.docTitle);
+    setMetaProperty('og:description', d.ogDesc);
+    setMetaProperty('og:locale', d.ogLocale);
+    setMetaProperty('og:url', DOMAIN);
+    setMetaProperty('og:image', DOMAIN + 'og.svg');
+    setMetaName('twitter:title', d.docTitle);
+    setMetaName('twitter:description', d.ogDesc);
+    setMetaName('twitter:image', DOMAIN + 'og.svg');
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical) canonical.setAttribute('href', DOMAIN);
+    updateLdJson(d);
+  }
+
+  function setMeta(name, content) {
+    const el = document.querySelector(`meta[name="${name}"]`);
+    if (el) el.setAttribute('content', content);
+  }
+
+  function setMetaProperty(prop, content) {
+    const el = document.querySelector(`meta[property="${prop}"]`);
+    if (el) el.setAttribute('content', content);
+  }
+
+  function setMetaName(name, content) {
+    const el = document.querySelector(`meta[name="${name}"]`);
+    if (el) el.setAttribute('content', content);
+  }
+
+  function updateLdJson(d) {
+    const el = document.getElementById('ld-json');
+    if (!el) return;
+    try {
+      const data = JSON.parse(el.textContent);
+      data.name = 'Globetrotter ID';
+      data.alternateName = '无界行者';
+      data.description = d.docDesc;
+      data.url = DOMAIN;
+      data.inLanguage = d.ogLocale;
+      el.textContent = JSON.stringify(data);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  function updateCountryOptions() {
+    const dict = getI18n().countries;
+    Array.from(countrySelect.options).forEach(opt => {
+      const key = opt.value || 'random';
+      opt.textContent = (opt.value ? FLAGS[opt.value] + ' ' : '🌍 ') + dict[key];
+    });
+  }
+
+  // ===== 生成 =====
   async function generateIdentities() {
     const country = countrySelect.value;
     const requested = clampCount(countInput.value);
@@ -56,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
       updateCount();
       renderPage();
     } catch (error) {
-      showToast('获取数据失败，请稍后重试');
+      showToast(t('errorFetch'));
       console.error(error);
     } finally {
       setLoading(false);
@@ -81,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
     avatarItem.className = 'detail-item';
     const avatarLabel = document.createElement('span');
     avatarLabel.className = 'detail-label';
-    avatarLabel.textContent = '头像';
+    avatarLabel.textContent = t('avatar');
     const avatarValue = document.createElement('span');
     avatarValue.className = 'detail-value';
     const img = document.createElement('img');
@@ -95,13 +287,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     grid.append(
       avatarItem,
-      detailItem('姓名', `${user.name.first} ${user.name.last}`),
-      detailItem('性别', capitalize(user.gender)),
-      detailItem('国籍', user.nat),
-      detailItem('邮箱', user.email),
-      detailItem('电话', formatPhoneNumber(user.phone, user.nat)),
-      detailItem('手机', formatPhoneNumber(user.cell, user.nat)),
-      detailItem('地址', formatAddress(user.location), true)
+      detailItem(t('name'), `${user.name.first} ${user.name.last}`),
+      detailItem(t('gender'), capitalize(user.gender)),
+      detailItem(t('nationality'), user.nat),
+      detailItem(t('email'), user.email),
+      detailItem(t('phone'), formatPhoneNumber(user.phone, user.nat)),
+      detailItem(t('mobile'), formatPhoneNumber(user.cell, user.nat)),
+      detailItem(t('address'), formatAddress(user.location), true)
     );
 
     td.appendChild(grid);
@@ -161,7 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateCount() {
-    countBadge.textContent = String(totalCount);
+    metaEl.textContent = t('records', { n: totalCount });
     emptyState.hidden = totalCount > 0;
   }
 
@@ -192,7 +384,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
     paginationEl.hidden = false;
-    pageInfo.textContent = `第 ${currentPage} / ${totalPages} 页 · 共 ${totalCount} 条`;
+    pageInfo.textContent = t('pageInfo', { cur: currentPage, total: totalPages, n: totalCount });
     prevPageBtn.disabled = currentPage <= 1;
     nextPageBtn.disabled = currentPage >= totalPages;
   }
@@ -208,7 +400,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function setLoading(loading) {
     generateBtn.disabled = loading;
     generateBtn.classList.toggle('btn-loading', loading);
-    generateBtn.textContent = loading ? '生成中…' : '生成';
+    generateBtn.textContent = loading ? t('generating') : t('generate');
   }
 
   // ===== 导出 =====
@@ -241,22 +433,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function copyCsv() {
     if (totalCount === 0) {
-      showToast('暂无数据可复制');
+      showToast(t('noDataCopy'));
       return;
     }
     const csv = generateCsv();
     try {
       await navigator.clipboard.writeText(csv);
-      showToast('CSV 已复制到剪贴板', 'success');
+      showToast(t('copySuccess'), 'success');
     } catch (err) {
       console.error(err);
-      showToast('复制失败，请尝试下载 CSV');
+      showToast(t('copyFail'));
     }
   }
 
   function downloadCsv() {
     if (totalCount === 0) {
-      showToast('暂无数据可下载');
+      showToast(t('noDataDownload'));
       return;
     }
     const csv = generateCsv();
@@ -269,7 +461,7 @@ document.addEventListener('DOMContentLoaded', () => {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-    showToast('CSV 下载已开始', 'success');
+    showToast(t('downloadStart'), 'success');
   }
 
   function showToast(message, type = 'error') {
@@ -278,4 +470,9 @@ document.addEventListener('DOMContentLoaded', () => {
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => toast.classList.add('hidden'), 2500);
   }
+
+  // ===== 初始化 =====
+  const saved = localStorage.getItem('gt-lang');
+  const initialLang = saved || (navigator.language && navigator.language.toLowerCase().startsWith('zh') ? 'zh' : 'en');
+  applyLanguage(initialLang);
 });

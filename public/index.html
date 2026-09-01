@@ -3,23 +3,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Globetrotter ID · 无界行者 — 全球随机身份与地址生成器">
+  <title>Globetrotter ID · 全球随机身份与地址生成器</title>
+  <meta name="description" content="Globetrotter ID（无界行者）是一个免费的全球随机身份与地址生成器，支持 20+ 国家/地区，一键生成带头像、姓名、邮箱、电话和地址的虚拟身份数据，适用于原型设计、测试与演示。">
+  <meta name="keywords" content="随机身份生成器, 虚拟身份, 假名生成, 随机地址, random user, fake identity, 测试数据, mock data">
+  <meta name="author" content="LibreDev">
+  <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#0070f3">
-  <title>Globetrotter ID · 无界行者</title>
+
+  <link rel="canonical" href="https://globetrotterid.is-an.org/">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://randomuser.me">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Globetrotter ID">
+  <meta property="og:title" content="Globetrotter ID · 全球随机身份与地址生成器">
+  <meta property="og:description" content="免费的全球随机身份与地址生成器，支持 20+ 国家/地区，一键生成虚拟身份数据。">
+  <meta property="og:url" content="https://globetrotterid.is-an.org/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://globetrotterid.is-an.org/og.svg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Globetrotter ID · 全球随机身份与地址生成器">
+  <meta name="twitter:description" content="免费的全球随机身份与地址生成器，支持 20+ 国家/地区，一键生成虚拟身份数据。">
+  <meta name="twitter:image" content="https://globetrotterid.is-an.org/og.svg">
+
   <link rel="stylesheet" href="styles.css">
+
+  <!-- JSON-LD 结构化数据 -->
+  <script type="application/ld+json" id="ld-json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Globetrotter ID",
+    "alternateName": "无界行者",
+    "description": "全球随机身份与地址生成器，支持 20+ 国家/地区，一键生成带头像、姓名、邮箱、电话和地址的虚拟身份数据。",
+    "url": "https://globetrotterid.is-an.org/",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "publisher": { "@type": "Organization", "name": "LibreDev" }
+  }
+  </script>
 </head>
 <body>
   <div class="page">
     <header class="hero">
-      <h1 class="title">Globetrotter ID</h1>
-      <p class="subtitle">无界行者 · 全球随机身份与地址生成</p>
+      <div class="lang-switch" role="group" aria-label="语言 / Language">
+        <button type="button" class="lang-btn" data-lang="zh">中文</button>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+      </div>
+      <h1 class="title" data-i18n="brand">Globetrotter ID</h1>
+      <p class="subtitle" data-i18n="tagline">无界行者 · 全球随机身份与地址生成</p>
     </header>
 
     <main class="container">
       <section class="card">
         <div class="controls">
-          <label for="country" class="form-label">国家</label>
+          <label for="country" class="form-label" data-i18n="country">国家</label>
           <select id="country" class="form-select" aria-label="选择国家" autocomplete="off">
             <option value="">🌍 随机</option>
             <option value="AU">🇦🇺 澳大利亚</option>
@@ -45,36 +89,36 @@
             <option value="US">🇺🇸 美国</option>
           </select>
 
-          <label for="count" class="form-label">数量</label>
+          <label for="count" class="form-label" data-i18n="count">数量</label>
           <input id="count" class="form-input" type="number" min="1" max="20" value="1" aria-label="生成数量" autocomplete="off">
 
-          <button id="generate-btn" class="btn btn-primary" type="button">生成</button>
-          <button id="clear-btn" class="btn btn-ghost" type="button">清空</button>
+          <button id="generate-btn" class="btn btn-primary" type="button" data-i18n="generate">生成</button>
+          <button id="clear-btn" class="btn btn-ghost" type="button" data-i18n="clear">清空</button>
         </div>
 
-        <p class="meta">已生成 <span id="count-badge">0</span> 条记录</p>
+        <p class="meta" id="meta"></p>
 
         <div class="toolbar">
-          <span class="toolbar-title">导出</span>
-          <button id="copy-csv" class="btn btn-ghost btn-sm" type="button">📋 复制 CSV</button>
-          <button id="download-csv" class="btn btn-ghost btn-sm" type="button">💾 下载 CSV</button>
+          <span class="toolbar-title" data-i18n="export">导出</span>
+          <button id="copy-csv" class="btn btn-ghost btn-sm" type="button" data-i18n="copyCsv">📋 复制 CSV</button>
+          <button id="download-csv" class="btn btn-ghost btn-sm" type="button" data-i18n="downloadCsv">💾 下载 CSV</button>
         </div>
 
         <div class="table-container">
           <table id="result-table" class="results-table"></table>
-          <p class="empty" id="empty-state">点击「生成」开始创建随机身份 ✨</p>
+          <p class="empty" id="empty-state" data-i18n="empty">点击「生成」开始创建随机身份 ✨</p>
           <div class="pagination" id="pagination" hidden>
-            <button id="prev-page" class="btn btn-ghost btn-sm" type="button">上一页</button>
+            <button id="prev-page" class="btn btn-ghost btn-sm" type="button" data-i18n="prev">上一页</button>
             <span class="page-info" id="page-info"></span>
-            <button id="next-page" class="btn btn-ghost btn-sm" type="button">下一页</button>
+            <button id="next-page" class="btn btn-ghost btn-sm" type="button" data-i18n="next">下一页</button>
           </div>
         </div>
       </section>
     </main>
 
     <footer class="footer">
-      Powered by <a href="https://libredev.is-an.org/" target="_blank" rel="noopener">LibreDev</a> ·
-      数据来源 <a href="https://randomuser.me" target="_blank" rel="noopener">RandomUser.me</a> ·
+      <span data-i18n="poweredBy">Powered by</span> <a href="https://libredev.is-an.org/" target="_blank" rel="noopener">LibreDev</a> ·
+      <span data-i18n="dataSource">数据来源</span> <a href="https://randomuser.me" target="_blank" rel="noopener">RandomUser.me</a> ·
       <a href="https://github.com/bestZwei/GlobeTrotterID" target="_blank" rel="noopener">GitHub</a>
     </footer>
   </div>

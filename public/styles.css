@@ -71,6 +71,35 @@ body {
   font-size: clamp(1rem, 2.5vw, 1.25rem);
 }
 
+/* ===== Language switch ===== */
+.lang-switch {
+  display: inline-flex;
+  gap: 4px;
+  margin-bottom: 20px;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-subtle);
+}
+
+.lang-btn {
+  border: none;
+  background: transparent;
+  color: var(--fg-muted);
+  font-size: 0.85rem;
+  padding: 6px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.lang-btn:hover { color: var(--fg); }
+
+.lang-btn.active {
+  background: var(--accent);
+  color: #fff;
+}
+
 /* ===== Layout ===== */
 .container {
   width: 100%;
