@@ -1,76 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Globetrotter ID</title>
+  <meta name="description" content="Globetrotter ID · 无界行者 — 全球随机身份与地址生成器">
+  <meta name="theme-color" content="#0070f3">
+  <title>Globetrotter ID · 无界行者</title>
+  <link rel="preconnect" href="https://randomuser.me">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <div class="title">Globetrotter ID</div>
-    <div class="subtitle">无界行者</div>
-  </header>
-  <main>
-    <div class="container">
-      <div class="form-group">
-        <label for="country" class="form-label">选择国家:</label>
-        <select id="country" class="form-select">
-          <option value="">随机</option>
-          <option value="AU">澳大利亚</option>
-          <option value="BR">巴西</option>
-          <option value="CA">加拿大</option>
-          <option value="CH">瑞士</option>
-          <option value="DE">德国</option>
-          <option value="DK">丹麦</option> <!-- 新增 -->
-          <option value="ES">西班牙</option>
-          <option value="FI">芬兰</option>
-          <option value="FR">法国</option>
-          <option value="GB">英国</option>
-          <option value="IE">爱尔兰</option>
-          <option value="IN">印度</option>
-          <option value="IR">伊朗</option>
-          <option value="MX">墨西哥</option>
-          <option value="NL">荷兰</option>
-          <option value="NO">挪威</option>  <!-- 新增 -->
-          <option value="NZ">新西兰</option>
-          <option value="RS">塞尔维亚</option> <!-- 新增 -->
-          <option value="TR">土耳其</option>
-          <option value="UA">乌克兰</option>
-          <option value="US">美国</option>
-        </select>
-        <button id="generate-btn" class="btn">生成</button>
-      </div>
+  <div class="page">
+    <header class="hero">
+      <h1 class="title">Globetrotter ID</h1>
+      <p class="subtitle">无界行者 · 全球随机身份与地址生成</p>
+    </header>
 
-      <div class="table-container">
-        <table id="result-table" class="results-table">
-          <thead>
-            <tr>
-              <th>头像</th>
-              <th>名字</th>
-              <th>性别</th>
-              <th>邮箱</th>
-              <th>电话</th>
-              <th>传真</th>
-              <th>地址</th>
-              <th>国籍</th>
-            </tr>
-          </thead>
-          <tbody>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </main>
-  <footer class="footer">
-    Powered by <a href="http://libredev.is-an.org/" target="_blank">LibreDev</a> |
-    <a href="https://github.com/bestZwei/GlobeTrotterID" target="_blank">GitHub</a>
-  </footer>
-  <div class="modal hidden" id="loading-modal">
-    <div class="modal-content">
-      <p>Loading...</p>
-    </div>
+    <main class="container">
+      <section class="card">
+        <div class="controls">
+          <label for="country" class="form-label">国家</label>
+          <select id="country" class="form-select" aria-label="选择国家" autocomplete="off">
+            <option value="">🌍 随机</option>
+            <option value="AU">🇦🇺 澳大利亚</option>
+            <option value="BR">🇧🇷 巴西</option>
+            <option value="CA">🇨🇦 加拿大</option>
+            <option value="CH">🇨🇭 瑞士</option>
+            <option value="DE">🇩🇪 德国</option>
+            <option value="DK">🇩🇰 丹麦</option>
+            <option value="ES">🇪🇸 西班牙</option>
+            <option value="FI">🇫🇮 芬兰</option>
+            <option value="FR">🇫🇷 法国</option>
+            <option value="GB">🇬🇧 英国</option>
+            <option value="IE">🇮🇪 爱尔兰</option>
+            <option value="IN">🇮🇳 印度</option>
+            <option value="IR">🇮🇷 伊朗</option>
+            <option value="MX">🇲🇽 墨西哥</option>
+            <option value="NL">🇳🇱 荷兰</option>
+            <option value="NO">🇳🇴 挪威</option>
+            <option value="NZ">🇳🇿 新西兰</option>
+            <option value="RS">🇷🇸 塞尔维亚</option>
+            <option value="TR">🇹🇷 土耳其</option>
+            <option value="UA">🇺🇦 乌克兰</option>
+            <option value="US">🇺🇸 美国</option>
+          </select>
+
+          <label for="count" class="form-label">数量</label>
+          <input id="count" class="form-input" type="number" min="1" max="20" value="1" aria-label="生成数量" autocomplete="off">
+
+          <button id="generate-btn" class="btn btn-primary" type="button">生成</button>
+          <button id="clear-btn" class="btn btn-ghost" type="button">清空</button>
+        </div>
+
+        <p class="meta">已生成 <span id="count-badge">0</span> 条记录</p>
+
+        <div class="toolbar">
+          <span class="toolbar-title">导出</span>
+          <button id="copy-csv" class="btn btn-ghost btn-sm" type="button">📋 复制 CSV</button>
+          <button id="download-csv" class="btn btn-ghost btn-sm" type="button">💾 下载 CSV</button>
+        </div>
+
+        <div class="table-container">
+          <table id="result-table" class="results-table"></table>
+          <p class="empty" id="empty-state">点击「生成」开始创建随机身份 ✨</p>
+          <div class="pagination" id="pagination" hidden>
+            <button id="prev-page" class="btn btn-ghost btn-sm" type="button">上一页</button>
+            <span class="page-info" id="page-info"></span>
+            <button id="next-page" class="btn btn-ghost btn-sm" type="button">下一页</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      Powered by <a href="https://libredev.is-an.org/" target="_blank" rel="noopener">LibreDev</a> ·
+      数据来源 <a href="https://randomuser.me" target="_blank" rel="noopener">RandomUser.me</a> ·
+      <a href="https://github.com/bestZwei/GlobeTrotterID" target="_blank" rel="noopener">GitHub</a>
+    </footer>
   </div>
+
+  <div class="toast hidden" id="toast" role="status" aria-live="polite"></div>
+
   <script src="script.js"></script>
 </body>
 </html>
